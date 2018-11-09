@@ -15,6 +15,7 @@ const userSchema = new Schema({
             productId: {
                 type: Schema.Types.ObjectId,
                 required: true,
+                ref:'Product',
             },
             quantity: {
                 type: Number,
@@ -47,6 +48,10 @@ userSchema.methods.addToCart = function (product) {
     }
     this.cart = updatedCart;
     return this.save();
+}
+
+userSchema.methods.getCart = function(){
+    return this.cart;
 }
 
 module.exports = mongoose.model('User', userSchema);
